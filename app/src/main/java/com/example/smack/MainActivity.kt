@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         login_button_nav.setOnClickListener {
             Unit
             Toast.makeText(this, "Login clicked", Toast.LENGTH_SHORT).show()
+            //Set intent to move on LoginActivity
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
         }
