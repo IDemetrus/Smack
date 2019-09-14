@@ -1,5 +1,6 @@
 package com.example.smack
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -37,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         login_button_nav.setOnClickListener {
             Unit
             Toast.makeText(this, "Login clicked", Toast.LENGTH_SHORT).show()
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
         }
         //Add click listener on the add channel button
         channel_add_button_nav.setOnClickListener {
