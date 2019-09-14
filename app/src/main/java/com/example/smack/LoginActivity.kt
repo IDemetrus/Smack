@@ -1,5 +1,6 @@
 package com.example.smack
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,9 +18,12 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "Login clicked", Toast.LENGTH_SHORT).show()
         }
         //Add click listener on create button
-        create_user_button.setOnClickListener {
+        sign_up_button.setOnClickListener {
             Unit
             Toast.makeText(this, "Create clicked", Toast.LENGTH_SHORT).show()
+            //Set intent to move on UserActivity
+            val intentCreateUser = Intent(this, UserActivity::class.java)
+            startActivity(intentCreateUser)
         }
     }
 }
