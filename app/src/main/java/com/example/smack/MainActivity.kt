@@ -8,11 +8,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 
 class MainActivity : AppCompatActivity() {
 
-    //init a drawer layout
-    lateinit var drawerLayout: DrawerLayout
-    //init a toggle action bar
-    lateinit var toggle: ActionBarDrawerToggle
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
