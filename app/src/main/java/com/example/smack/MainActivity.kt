@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,11 @@ class MainActivity : AppCompatActivity() {
         channel_add_button_nav.setOnClickListener {
             Unit
             Toast.makeText(this, "Add channel clicked", Toast.LENGTH_SHORT).show()
+        }
+        //Add click listener on the send text on channel button
+        send_message_button.setOnClickListener {
+            Unit
+            Toast.makeText(this, "Send message clicked", Toast.LENGTH_SHORT).show()
         }
 
     }
