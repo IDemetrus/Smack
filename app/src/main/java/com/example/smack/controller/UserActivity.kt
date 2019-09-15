@@ -20,11 +20,13 @@ class UserActivity : AppCompatActivity() {
 
         //Add click listener on create user button
         create_user_button.setOnClickListener {
-            Unit
-            Toast.makeText(this, "Create user clicked", Toast.LENGTH_SHORT).show()
-            AuthService.registerUser(this, "j@john.com", "123456") { complete ->
-                if (complete) {
+            val userEmail = create_user_email_text.text.toString()
+            val userPassword = create_user_password_text.text.toString()
 
+            Unit
+            AuthService.registerUser(this, userEmail, userPassword) { complete ->
+                if (complete) {
+                    Toast.makeText(this,"Successfully added new user: $userEmail", Toast.LENGTH_SHORT).show()
                 }
             }
         }
