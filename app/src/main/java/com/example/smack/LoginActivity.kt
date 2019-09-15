@@ -20,7 +20,6 @@ class LoginActivity : AppCompatActivity() {
         //Add click listener on create button
         sign_up_button.setOnClickListener {
             Unit
-            Toast.makeText(this, "Create clicked", Toast.LENGTH_SHORT).show()
             //Set intent to move on UserActivity
             val intentCreateUser = Intent(this, UserActivity::class.java)
             startActivity(intentCreateUser)
