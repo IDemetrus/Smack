@@ -53,7 +53,8 @@
         android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/message_text_field"
         app:layout_constraintEnd_toEndOf="@+id/message_text_field"
-        app:srcCompat="@drawable/ic_menu_send" />
+        app:srcCompat="@drawable/ic_menu_send"
+        tools:ignore="VectorDrawableCompat" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/message_list_view"
