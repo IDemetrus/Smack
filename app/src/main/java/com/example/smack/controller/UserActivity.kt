@@ -1,5 +1,6 @@
 package com.example.smack.controller
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
@@ -20,13 +21,30 @@ class UserActivity : AppCompatActivity() {
 
         //Add click listener on create user button
         create_user_button.setOnClickListener {
+            val userName = create_user_name_text.text.toString()
             val userEmail = create_user_email_text.text.toString()
             val userPassword = create_user_password_text.text.toString()
 
             Unit
             AuthService.registerUser(this, userEmail, userPassword) { complete ->
                 if (complete) {
-                    Toast.makeText(this,"Successfully added new user: $userEmail", Toast.LENGTH_SHORT).show()
+                    AuthService.loginUser(this, userEmail, userPassword) { complete ->
+                        if (complete) {
+                            Toast.makeText(this,"Successfully added new user: $userEmail", Toast.LENGTH_SHORT).show()
+                            AuthService.createUser(
+                                this,
+                                userName,
+                                userEmail,
+                                userAvatar,
+                                avatarColor
+                            ) { complete ->
+                                if (complete) {
+                                    val intentMain = Intent(this, MainActivity::class.java)
+                                    startActivity(intentMain)
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
