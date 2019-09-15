@@ -1,11 +1,11 @@
-package com.example.smack
+package com.example.smack.controller
 
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import com.example.smack.R
+import com.example.smack.services.AuthService
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlin.random.Random.Default.nextInt
 
@@ -22,6 +22,11 @@ class UserActivity : AppCompatActivity() {
         create_user_button.setOnClickListener {
             Unit
             Toast.makeText(this, "Create user clicked", Toast.LENGTH_SHORT).show()
+            AuthService.registerUser(this, "j@john.com", "123456") { complete ->
+                if (complete) {
+
+                }
+            }
         }
         //Add click listener on create background color button
         create_background_color_button.setOnClickListener {
@@ -51,7 +56,6 @@ class UserActivity : AppCompatActivity() {
             }
             val resourceId = resources.getIdentifier(userAvatar, "drawable", packageName)
             create_user_avatar_image.setImageResource(resourceId)
-
         }
     }
 }
