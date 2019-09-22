@@ -7,8 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="/run/media/bvm/861f5819-50a3-45e2-adae-87fb639ebb9c/home/bvm/Downloads/StudioProjects/Smack" />
+            <option value="/run/media/bvm/861f5819-50a3-45e2-adae-87fb639ebb9c/home/bvm/Downloads/StudioProjects/Smack/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
