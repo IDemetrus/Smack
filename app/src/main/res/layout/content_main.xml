@@ -50,7 +50,7 @@
         android:layout_height="32dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
-        android:tint="@color/colorPrimary"
+        android:tint="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="@+id/message_text_field"
         app:layout_constraintEnd_toEndOf="@+id/message_text_field"
         app:srcCompat="@drawable/ic_menu_send"

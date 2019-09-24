@@ -3,10 +3,13 @@ package com.example.smack.controller
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.smack.R
 import com.example.smack.services.AuthService
+import com.example.smack.utils.USER_DATA_CHANGE_BROADCAST
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlin.random.Random.Default.nextInt
 
@@ -18,32 +21,62 @@ class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
+        createSpinner.visibility = View.INVISIBLE
+
 
         //Add click listener on create user button
         create_user_button.setOnClickListener {
             val userName = create_user_name_text.text.toString()
             val userEmail = create_user_email_text.text.toString()
             val userPassword = create_user_password_text.text.toString()
-
             Unit
-            AuthService.registerUser(this, userEmail, userPassword) { complete ->
-                if (complete) {
-                    AuthService.loginUser(this, userEmail, userPassword) { complete ->
-                        if (complete) {
-                            Toast.makeText(this,"Successfully added new user: $userEmail", Toast.LENGTH_SHORT).show()
-                            AuthService.createUser(
-                                this,
-                                userName,
-                                userEmail,
-                                userAvatar,
-                                avatarColor
-                            ) { complete ->
-                                if (complete) {
-                                    val intentMain = Intent(this, MainActivity::class.java)
-                                    startActivity(intentMain)
+            if (userName.isNotEmpty() && userEmail.isNotEmpty() && userPassword.isNotEmpty()) {
+                AuthService.registerUser(this, userEmail, userPassword) { complete ->
+                    if (complete) {
+                        AuthService.loginUser(this, userEmail, userPassword) { complete ->
+                            if (complete) {
+                                Toast.makeText(
+                                    this,
+                                    "Successfully added new user: $userEmail",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                AuthService.createUser(
+                                    this,
+                                    userName,
+                                    userEmail,
+                                    userAvatar,
+                                    avatarColor
+                                ) { complete ->
+                                    if (complete) {
+                                        val userDataChanged = Intent(USER_DATA_CHANGE_BROADCAST)
+                                        LocalBroadcastManager.getInstance(this)
+                                            .sendBroadcast(userDataChanged)
+                                        val intentMain = Intent(this, MainActivity::class.java)
+                                        enableSpinner(false)
+//                                        startActivity(intentMain)
+                                        finish()
+                                    } else {
+                                        Toast.makeText(
+                                            this,
+                                            "Could not register user: $userEmail",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
                                 }
+                            } else {
+                                Toast.makeText(
+                                    this,
+                                    "Could not register user: $userEmail",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                         }
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Could not register user: $userEmail",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
@@ -77,5 +110,17 @@ class UserActivity : AppCompatActivity() {
             val resourceId = resources.getIdentifier(userAvatar, "drawable", packageName)
             create_user_avatar_image.setImageResource(resourceId)
         }
+    }
+
+    private fun enableSpinner(enable: Boolean) {
+        if (enable) {
+            createSpinner.visibility = View.VISIBLE
+
+        } else {
+            createSpinner.visibility = View.INVISIBLE
+        }
+        create_user_button.isEnabled = !enable
+        create_user_avatar_image.isEnabled = !enable
+        create_background_color_button.isEnabled = !enable
     }
 }

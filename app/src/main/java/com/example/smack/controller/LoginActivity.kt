@@ -4,10 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.smack.R
 import com.example.smack.services.AuthService
+import com.example.smack.utils.USER_DATA_CHANGE_BROADCAST
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_user.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -22,11 +23,17 @@ class LoginActivity : AppCompatActivity() {
             Unit
             AuthService.loginUser(this, userEmail, userPassword) { complete ->
                 if (complete) {
-                    Toast.makeText(this, "Successfully log in as: $userEmail", Toast.LENGTH_SHORT).show()
-                    val intentMain = Intent(this, MainActivity::class.java)
-                    startActivity(intentMain)
-                }else{
-                    Toast.makeText(this, "Could not log in as: $userEmail", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Successfully log in as: $userEmail", Toast.LENGTH_SHORT)
+                        .show()
+                    // Init data login change broadcast
+                    val userLoginChanged = Intent(USER_DATA_CHANGE_BROADCAST)
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(userLoginChanged)
+//                    val intentMain = Intent(this, MainActivity::class.java)
+//                    startActivity(intentMain)
+                    finish()
+                } else {
+                    Toast.makeText(this, "Could not log in as: $userEmail", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
@@ -38,4 +45,5 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intentCreateUser)
         }
     }
+
 }

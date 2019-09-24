@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_header_view"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@color/colorPrimary"
     android:gravity="bottom"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:background="@color/primaryColor"
+    android:theme="@style/ThemeOverlay.MaterialComponents.Dark">
 
     <ImageView
         android:id="@+id/user_image_nav"
@@ -26,9 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:textColor="@color/primaryTextColor"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/nav_header_title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/user_image_nav"
         app:layout_constraintTop_toTopOf="@+id/user_image_nav" />
@@ -41,18 +43,19 @@
         android:layout_marginLeft="16dp"
         android:text="@string/nav_header_subtitle"
         android:textSize="16sp"
+        android:textColor="@color/primaryTextColor"
         app:layout_constraintStart_toEndOf="@+id/user_image_nav"
         app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/login_button_nav"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:background="@android:color/transparent"
         android:text="login"
         android:textSize="18sp"
+        android:background="@color/primaryDarkColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

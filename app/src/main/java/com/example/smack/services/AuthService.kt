@@ -3,6 +3,7 @@ package com.example.smack.services
 import android.content.Context
 import android.util.Log
 import com.android.volley.Response
+import com.android.volley.Response.ErrorListener
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -30,8 +31,8 @@ object AuthService {
         val requestBody = jsonBody.toString()
         val registerRequest = object : StringRequest(Method.POST,
             URL_REGISTER,
-            Response.Listener { response -> complete(true) },
-            Response.ErrorListener { error ->
+            Response.Listener { complete(true) },
+            ErrorListener { error ->
                 Log.d("ERROR", "Could not register user: $error")
                 complete(false)
             }) {
@@ -66,7 +67,7 @@ object AuthService {
                 }
 
             },
-            Response.ErrorListener { error ->
+            ErrorListener { error ->
                 //here is we got some errors
                 Log.d("ERROR", "Could not log in as user: $error")
                 complete(false)
@@ -113,7 +114,7 @@ object AuthService {
                     complete(false)
                 }
             },
-            Response.ErrorListener { error ->
+            ErrorListener { error ->
                 Log.d("ERROR", "Could not create user: $error")
                 complete(false)
             }) {

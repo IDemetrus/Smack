@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".controller.UserActivity">
 
-    <EditText
+
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/create_user_name_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -14,7 +15,6 @@
         android:ems="10"
         android:hint="Username.."
         android:inputType="textPersonName"
-        android:textColor="@android:color/darker_gray"
         android:paddingHorizontal="8dp"
         android:layout_marginHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/create_user_email_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -30,7 +30,6 @@
         android:ems="10"
         android:hint="Email.."
         android:inputType="textPersonName"
-        android:textColor="@android:color/darker_gray"
         android:paddingHorizontal="8dp"
         android:layout_marginHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_user_name_text" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/create_user_password_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -70,45 +69,49 @@
         android:layout_width="88dp"
         android:layout_height="88dp"
         android:layout_marginTop="16dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_user_avatar_text"
         app:srcCompat="@drawable/profiledefault" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/create_background_color_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="@color/colorPrimary"
         android:text="generate background color"
-        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_user_avatar_image" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/create_user_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
         android:text="create user"
-        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/createSpinner"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/create_user_avatar_text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
