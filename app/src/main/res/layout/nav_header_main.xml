@@ -14,8 +14,8 @@
         android:id="@+id/user_image_nav"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginBottom="4dp"
         android:contentDescription="@string/nav_header_desc"
         app:layout_constraintBottom_toTopOf="@+id/login_button_nav"
@@ -50,7 +50,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login_button_nav"
-        android:layout_width="wrap_content"
+        android:layout_width="104dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
