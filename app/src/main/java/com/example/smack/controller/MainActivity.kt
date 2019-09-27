@@ -21,23 +21,6 @@ import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    // Create user data change receiver
-    private val userDataChangeReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (AuthService.isLogIn) {
-                user_email.text = UserDataService.email
-                Log.v("UserEmail", "User email is: ${UserDataService.email}")
-                user_name.text = UserDataService.name
-                val resourceId = resources.getIdentifier(UserDataService.avatarTitle, "drawable", packageName )
-                Log.v("UserAvatarTitle", "User avatar title is: ${UserDataService.avatarTitle}")
-                user_image_nav.setImageResource(resourceId)
-                //TODO try to fix generate bk color
-                //user_image_nav.setBackgroundColor(UserDataService.returnAvatarColor(UserDataService.avatarColor))
-                login_button_nav.text = "Logout"
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -68,8 +51,6 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
 
-
-
         //Add click listener on the login button
         login_button_nav.setOnClickListener {
             Unit
@@ -90,4 +71,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Create user data change receiver
+    private val userDataChangeReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (AuthService.isLogIn) {
+                user_email.text = UserDataService.email
+                Log.v("UserEmail", "User email is: ${UserDataService.email}")
+                user_name.text = UserDataService.name
+                val resourceId = resources.getIdentifier(UserDataService.avatarTitle, "drawable", packageName )
+                Log.v("UserAvatarTitle", "User avatar title is: ${UserDataService.avatarTitle}")
+                user_image_nav.setImageResource(resourceId)
+                //TODO try to fix generate bk color
+                //user_image_nav.setBackgroundColor(UserDataService.returnAvatarColor(UserDataService.avatarColor))
+                login_button_nav.text = "Logout"
+            }
+        }
+    }
 }

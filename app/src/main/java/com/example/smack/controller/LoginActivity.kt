@@ -4,10 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.smack.R
 import com.example.smack.services.AuthService
-import com.example.smack.utils.USER_DATA_CHANGE_BROADCAST
+import com.example.smack.services.UserDataService
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -18,19 +17,47 @@ class LoginActivity : AppCompatActivity() {
 
         //Add click listener on login button
         login_button.setOnClickListener {
-            val userEmail = login_email_text.text.toString()
-            val userPassword = login_password_text.text.toString()
+            val userEmail = login_email_text.text.toString().trim()
+            val userPassword = login_password_text.text.toString().trim()
             Unit
             AuthService.loginUser(this, userEmail, userPassword) { complete ->
                 if (complete) {
-                    Toast.makeText(this, "Successfully log in as: $userEmail", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        this,
+                        "Token received as: ${AuthService.authToken}",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
-                    // Init data login change broadcast
-                    val userLoginChanged = Intent(USER_DATA_CHANGE_BROADCAST)
-                    LocalBroadcastManager.getInstance(this).sendBroadcast(userLoginChanged)
-//                    val intentMain = Intent(this, MainActivity::class.java)
-//                    startActivity(intentMain)
-                    finish()
+                    AuthService.findUBE(this) { complete ->
+                        if (complete) {
+                            Toast.makeText(
+                                this,
+                                "Successfully authorized as: $userEmail",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            Toast.makeText(
+                                this,
+                                "Email received as: ${UserDataService.email}",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            Toast.makeText(
+                                this,
+                                "Name received as: ${UserDataService.name}",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            finish()
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Could not auth as: $userEmail",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+                    }
+
                 } else {
                     Toast.makeText(this, "Could not log in as: $userEmail", Toast.LENGTH_SHORT)
                         .show()
