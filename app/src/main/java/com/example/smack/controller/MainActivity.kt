@@ -1,13 +1,11 @@
 package com.example.smack.controller
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -61,7 +59,19 @@ class MainActivity : AppCompatActivity() {
         //Add click listener on the add channel button
         channel_add_button_nav.setOnClickListener {
             Unit
-            Toast.makeText(this, "Add channel clicked", Toast.LENGTH_SHORT).show()
+            val builder = AlertDialog.Builder(this)
+            val dialogView = layoutInflater.inflate(R.layout.add_channel_dialog, null)
+            if (AuthService.isLogIn) {
+                builder.setView(dialogView)
+                    .setPositiveButton("Add") { dialog: DialogInterface?, which: Int ->
+                        // add
+                        Toast.makeText(this, "Add channel clicked", Toast.LENGTH_SHORT).show()
+                    }
+                    .setNegativeButton("Cancel") { dialog: DialogInterface?, which: Int ->
+
+                    }
+                    .show()
+            }
         }
         //Add click listener on the send text on channel button
         send_message_button.setOnClickListener {
@@ -78,13 +88,17 @@ class MainActivity : AppCompatActivity() {
                 user_email.text = UserDataService.email
                 Log.v("UserEmail", "User email is: ${UserDataService.email}")
                 user_name.text = UserDataService.name
-                val resourceId = resources.getIdentifier(UserDataService.avatarTitle, "drawable", packageName )
+                val resourceId =
+                    resources.getIdentifier(UserDataService.avatarTitle, "drawable", packageName)
                 Log.v("UserAvatarTitle", "User avatar title is: ${UserDataService.avatarTitle}")
-                user_image_nav.setImageResource(resourceId)
+                if(resourceId > 0) {
+                    user_image_nav.setImageResource(resourceId)
+                }
                 //TODO try to fix generate bk color
                 //user_image_nav.setBackgroundColor(UserDataService.returnAvatarColor(UserDataService.avatarColor))
                 login_button_nav.text = "Logout"
             }
         }
     }
+
 }
