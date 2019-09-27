@@ -3,6 +3,7 @@ package com.example.smack.controller
 import android.content.*
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -65,7 +66,10 @@ class MainActivity : AppCompatActivity() {
                 builder.setView(dialogView)
                     .setPositiveButton("Add") { dialog: DialogInterface?, which: Int ->
                         // add
-                        Toast.makeText(this, "Add channel clicked", Toast.LENGTH_SHORT).show()
+                        val addChannelName = dialogView.findViewById<EditText>(R.id.channel_name_txt)
+                        val addChannelDesc = dialogView.findViewById<EditText>(R.id.channel_desc_txt)
+                        val channelName = addChannelName.text.toString()
+                        val channelDesc = addChannelDesc.text.toString()
                     }
                     .setNegativeButton("Cancel") { dialog: DialogInterface?, which: Int ->
 
