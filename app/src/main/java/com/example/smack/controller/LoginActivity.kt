@@ -33,32 +33,8 @@ class LoginActivity : AppCompatActivity() {
                 AuthService.loginUser(this, userEmail, userPassword) { complete ->
                     enableSpinner(false)
                     if (complete) {
-                        Toast.makeText(
-                            this,
-                            "Token received as: ${AuthService.authToken}",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
                         AuthService.findUBE(this) { complete ->
                             if (complete) {
-                                Toast.makeText(
-                                    this,
-                                    "Successfully authorized as: $userEmail",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                Toast.makeText(
-                                    this,
-                                    "Email received as: ${UserDataService.email}",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                                Toast.makeText(
-                                    this,
-                                    "Name received as: ${UserDataService.name}",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-
                                 finish()
                             } else {
                                 Toast.makeText(
