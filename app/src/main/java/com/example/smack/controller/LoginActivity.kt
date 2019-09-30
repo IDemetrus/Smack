@@ -25,12 +25,19 @@ class LoginActivity : AppCompatActivity() {
                 if (complete) {
                     Toast.makeText(this, "Successfully log in as: $userEmail", Toast.LENGTH_SHORT)
                         .show()
-                    // Init data login change broadcast
-                    val userLoginChanged = Intent(USER_DATA_CHANGE_BROADCAST)
-                    LocalBroadcastManager.getInstance(this).sendBroadcast(userLoginChanged)
+                    AuthService.findUserByEmail(this, userEmail){ complete ->
+                        if(complete){
+                            // Init data login change broadcast
+                            val userLoginChanged = Intent(USER_DATA_CHANGE_BROADCAST)
+                            LocalBroadcastManager.getInstance(this).sendBroadcast(userLoginChanged)
 //                    val intentMain = Intent(this, MainActivity::class.java)
 //                    startActivity(intentMain)
-                    finish()
+                            finish()
+                        }
+                        Toast.makeText(this, "Could not log in as: $userEmail", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+
                 } else {
                     Toast.makeText(this, "Could not log in as: $userEmail", Toast.LENGTH_SHORT)
                         .show()

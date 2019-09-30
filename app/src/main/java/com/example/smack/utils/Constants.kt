@@ -6,10 +6,13 @@ package com.example.smack.utils
 // For local access Linux PC
 // const val BASE_URL = "http://192.168.42.211:3005/v1/"
 // For local access Windows
-const val BASE_URL = "http://192.168.42.67:3005/v1/"
+//const val BASE_URL = "http://192.168.42.67:3005/v1/"
+// For local access Linux Note
+const val BASE_URL = "http://192.168.42.139:3005/v1/"
 const val URL_REGISTER = "${BASE_URL}account/register"
 const val URL_LOGIN = "${BASE_URL}account/login"
 const val URL_CREATE_USER = "${BASE_URL}user/add"
+const val URL_FIND_USER_BY_EMAIL = "${BASE_URL}user/byEmail/"
 
 //For local broadcasting
 const val USER_DATA_CHANGE_BROADCAST = "USER_DATA_CHANGE_BROADCAST"
