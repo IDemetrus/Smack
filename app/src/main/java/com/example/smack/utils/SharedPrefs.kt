@@ -10,6 +10,7 @@ class SharedPrefs(context: Context) {
     private val isLOGGED = "isLogIn"
     private val authTOKEN = "authToken"
     private val userEMAIL = "userEmail"
+    private val lastCHANNEL = "lastChannel"
 
     var isLogIn: Boolean
         get() = prefs.getBoolean(isLOGGED, false)
@@ -22,7 +23,10 @@ class SharedPrefs(context: Context) {
     var userEmail: String?
         get() = prefs.getString(userEMAIL, "")
         set(value) = prefs.edit().putString(userEMAIL, value).apply()
+    var lastChannel: String?
+        get() = prefs.getString(lastCHANNEL, "")
+        set(value) = prefs.edit().putString(lastCHANNEL, value).apply()
 
-    val requestQueue = Volley.newRequestQueue(context)
+    val requestQueue = Volley.newRequestQueue(context)!!
 
 }

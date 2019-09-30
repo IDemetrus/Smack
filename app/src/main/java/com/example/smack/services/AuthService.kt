@@ -8,7 +8,6 @@ import com.android.volley.Response
 import com.android.volley.Response.ErrorListener
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.example.smack.controller.App
 import com.example.smack.utils.*
 import org.json.JSONException
@@ -16,15 +15,7 @@ import org.json.JSONObject
 
 object AuthService {
 
-//    var isLogIn = false
-//    var userEmail = ""
-//    var authToken = ""
-
-    fun registerUser(
-        context: Context,
-        email: String,
-        password: String,
-        complete: (Boolean) -> Unit
+    fun registerUser(email: String, password: String, complete: (Boolean) -> Unit
     ) {
         val jsonBody = JSONObject()
         jsonBody.put("email", email)
@@ -48,7 +39,7 @@ object AuthService {
         App.prefs.requestQueue.add(registerRequest)
     }
 
-    fun loginUser(context: Context, email: String, password: String, complete: (Boolean) -> Unit) {
+    fun loginUser(email: String, password: String, complete: (Boolean) -> Unit) {
         val jsonBody = JSONObject()
         jsonBody.put("email", email)
         jsonBody.put("password", password)
@@ -66,7 +57,6 @@ object AuthService {
                     Log.d("JSON", "EXC: " + e.localizedMessage)
                     complete(false)
                 }
-
             },
             ErrorListener { error ->
                 //here is we got some errors
@@ -84,11 +74,7 @@ object AuthService {
         App.prefs.requestQueue.add(loginRequest)
     }
 
-    fun createUser(
-        context: Context,
-        name: String,
-        email: String,
-        avatarTitle: String,
+    fun createUser(name: String, email: String, avatarTitle: String,
         avatarColor: String,
         complete: (Boolean) -> Unit
     ) {

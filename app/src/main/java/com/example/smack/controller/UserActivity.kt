@@ -21,8 +21,6 @@ class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
-        createSpinner.visibility = View.INVISIBLE
-
 
         //Add click listener on create user button
         create_user_button.setOnClickListener {
@@ -31,9 +29,9 @@ class UserActivity : AppCompatActivity() {
             val userPassword = create_user_password_text.text.toString()
             Unit
             if (userName.isNotEmpty() && userEmail.isNotEmpty() && userPassword.isNotEmpty()) {
-                AuthService.registerUser(this, userEmail, userPassword) { complete ->
+                AuthService.registerUser(userEmail, userPassword) { complete ->
                     if (complete) {
-                        AuthService.loginUser(this, userEmail, userPassword) { complete ->
+                        AuthService.loginUser(userEmail, userPassword) { complete ->
                             if (complete) {
                                 Toast.makeText(
                                     this,
@@ -41,7 +39,6 @@ class UserActivity : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 AuthService.createUser(
-                                    this,
                                     userName,
                                     userEmail,
                                     userAvatar,
@@ -51,9 +48,6 @@ class UserActivity : AppCompatActivity() {
                                         val userDataChanged = Intent(USER_DATA_CHANGE_BROADCAST)
                                         LocalBroadcastManager.getInstance(this)
                                             .sendBroadcast(userDataChanged)
-                                        val intentMain = Intent(this, MainActivity::class.java)
-                                        enableSpinner(false)
-//                                        startActivity(intentMain)
                                         finish()
                                     } else {
                                         Toast.makeText(
@@ -110,17 +104,5 @@ class UserActivity : AppCompatActivity() {
             val resourceId = resources.getIdentifier(userAvatar, "drawable", packageName)
             create_user_avatar_image.setImageResource(resourceId)
         }
-    }
-
-    private fun enableSpinner(enable: Boolean) {
-        if (enable) {
-            createSpinner.visibility = View.VISIBLE
-
-        } else {
-            createSpinner.visibility = View.INVISIBLE
-        }
-        create_user_button.isEnabled = !enable
-        create_user_avatar_image.isEnabled = !enable
-        create_background_color_button.isEnabled = !enable
     }
 }
